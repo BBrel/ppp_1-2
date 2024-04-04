@@ -6,7 +6,6 @@ class Client:
         self.port = 65432
         self.host = 'localhost'
         self.sock = None
-        self.main()
 
     def __get_connection(self):
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -54,4 +53,5 @@ class Client:
                 self.close()
 
 
-Client()
+cl = Client()
+cl.main()
