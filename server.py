@@ -1,6 +1,6 @@
 import socket
 from program import Program
-
+from threading import Thread
 
 prog = Program()
 
@@ -20,13 +20,13 @@ def handle_commands(client):
         prog.save_file_info(prog.get_directory_data())
         file_data = prog.get_binary_file_info()
         client.sendall(file_data)
+    client_socket.close()
 
 
 while True:
     client_socket, address = s.accept()
     print("Connected by", address)
-    handle_commands(client_socket)
-    client_socket.close()
+    Thread(target=handle_commands, args=(client_socket,)).start()
 
 
 
